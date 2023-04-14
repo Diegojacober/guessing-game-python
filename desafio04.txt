@@ -1,0 +1,28 @@
+Quem sou eu?
+
+-- Adivinhar quem é
+    - com 5 dicas
+        - Acertou com 1 dica: 50 pontos
+        - Acertou com 2 dicas: 40 pontos
+        - Acertou com 3 dicas: 30 pontos
+        - Acertou com 4 dicas: 20 pontos
+        - Acertou com 5 dicas: 10 pontos
+
+    Adicional: Criar ranking utilizando a biblioteca Pandas (manipulação de arquivos xlsx(excel))
+
+- Temas: 
+        - Personagens de desenhos (simpsons, bob esponja, hora de aventura)
+        - Atores famosos (fácil: somente atores brasileiros, difícil: atores do mundo todo)
+        - Pessoas famosas no mundo da tecnologia
+
+
+-------------------NECESSÁRIO UTILIZAR-------------------
+
+1: APLICAÇÃO ORIENTADA A OBJETOS (utilizar heranças e polimorfismo)
+2: UTILIZAR O PANDAS, para criar um ranking
+
+
+Classes:
+    Person (nome)
+        -> Player()
+        -> Character()
