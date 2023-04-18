@@ -1,13 +1,25 @@
 import pandas as pd
 from models.player import Player
 
-temas = ['Carros', 'Paises', 'Times do Brasil', 'Personagens de desenhos']
+temas = [
+    {'tema':'Carros','preco':50, 'palavras': {'palavra': 'Ferrari',
+     'dicas': 
+         ['Carro vermelho mais famoso do mundo',
+          'O seu cirador se chamava Enzo']
+     }},
+    {'tema':'Paises','preco':20, 'palavras': {'palavra': 'Brasil',
+     'dicas': 
+         ['País do futebol',
+          'Maior país da América do sul']
+     }},
+    ]
 
-palavras = [
-    {'palavra': 'Ferrari', 'dicas': ['Carro vermelho mais famoso do mundo'], 'tema_id': 0},
-]
 
-def get_players():
+def get_players() -> pd.DataFrame:
+    """esta função procura o arquivo excel com todos os jogadores
+
+    Returns: pd.DataFrame
+    """
     jogadores = pd.read_excel('archives\players.xlsx',index_col='id')
     return jogadores
 
