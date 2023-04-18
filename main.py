@@ -11,7 +11,13 @@ def get_players():
     jogadores = pd.read_excel('archives\players.xlsx',index_col='id')
     return jogadores
 
-def get_player_data():
+def get_player_data() -> Player:
+    """Esta função pega qual o nome do jogador e procura o mesmo na base de dados,
+    caso encontre, retorna o objeto,
+    caso não encontre, cria um novo registro e retorna o objeto
+
+    Returns: Player -> Objeto do jogador
+    """
     name = ''
     while True:
         name = input('Qual seu nome? ').upper()
@@ -22,19 +28,19 @@ def get_player_data():
             players_name = list(players_table["nome"])
             if name in players_name:
                 player_data = players_table.loc[players_table['nome'] == name]
-                jogador = Player(nome=player_data['nome'],
-                                 pontos=player_data['pontuacao'],
-                                 partidas=player_data['partidas'],
-                                 moedas=player_data['moedas'],
-                                 media=['mediapontos'])
+                
+                jogador = Player(nome=player_data['nome'].values[0],
+                                 pontos=player_data['pontuacao'].values[0],
+                                 partidas=player_data['partidas'].values[0],
+                                 moedas=player_data['moedas'].values[0],
+                                 media=player_data['mediapontos'].values[0])
                 # jogador.save_player(name=name)
                 return jogador
             else:
-                print('Criar novo jogador')
-                # Criar novo jogador na tabela
+                print('Criando novo jogador...')
                 player_data = Player(nome=name)
                 player_data.new_player()
-            break
+                return player_data
 
         
-get_player_data()
+player = get_player_data()

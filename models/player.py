@@ -11,8 +11,25 @@ class Player():
         self.__media = media
         
         
-    def __str__(self):
-        return f"Nome do jogador: {self.__nome}, pontos: {self.__pontos}"
+    @property
+    def nome(self):
+        return self.__nome
+    
+    @property
+    def pontos(self):
+        return self.__pontos
+    
+    @property
+    def partidas(self):
+        return self.__partidas
+    
+    @property
+    def moedas(self):
+        return self.__moedas
+    
+    @property
+    def media(self):
+        return self.__media
     
     def save_player(self, name:str):
         jogadores = pd.read_excel('C:/Users/57761933898/Desktop/diego/guessing-game-python/archives/players.xlsx',index_col='id')
