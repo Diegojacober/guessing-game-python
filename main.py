@@ -1,19 +1,6 @@
 import pandas as pd
 from models.player import Player
-
-temas = [
-    {'tema':'Carros','preco':50, 'palavras': {'palavra': 'Ferrari',
-     'dicas': 
-         ['Carro vermelho mais famoso do mundo',
-          'O seu cirador se chamava Enzo']
-     }},
-    {'tema':'Paises','preco':20, 'palavras': {'palavra': 'Brasil',
-     'dicas': 
-         ['País do futebol',
-          'Maior país da América do sul']
-     }},
-    ]
-
+from models.game import Game
 
 def get_players() -> pd.DataFrame:
     """esta função procura o arquivo excel com todos os jogadores
@@ -46,7 +33,6 @@ def get_player_data() -> Player:
                                  partidas=player_data['partidas'].values[0],
                                  moedas=player_data['moedas'].values[0],
                                  media=player_data['mediapontos'].values[0])
-                # jogador.save_player(name=name)
                 return jogador
             else:
                 print('Criando novo jogador...')
@@ -54,5 +40,10 @@ def get_player_data() -> Player:
                 player_data.new_player()
                 return player_data
 
-        
+def menu():
+    ...    
+    
 player = get_player_data()
+game = Game(player)
+while True:
+    game.play()

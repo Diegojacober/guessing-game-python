@@ -31,24 +31,29 @@ class Player():
     def media(self):
         return self.__media
     
-    def save_player(self, name:str):
-        jogadores = pd.read_excel('C:/Users/57761933898/Desktop/diego/guessing-game-python/archives/players.xlsx',index_col='id')
+    def save_player(self, name:str, pontos:int, moedas:int):
+        jogadores = pd.read_excel('D:/Projetos/guessing-game-python/archives/players.xlsx',index_col='id')
         jogadores = pd.DataFrame(jogadores)
         player_data = jogadores.loc[jogadores['nome'] == name]
         print(player_data)
         index = player_data.index[0]
-        jogadores.at[int(index),'nome']='TESTE'
+        jogadores.at[int(index),'nome']=name
+        jogadores.at[int(index),'pontuacao'] += pontos
+        jogadores.at[int(index),'moedas'] += moedas
+        jogadores.at[int(index),'partidas'] += 1
+        jogadores.at[int(index),'mediapontos'] = jogadores.at[int(index),'pontuacao'] / jogadores.at[int(index),'partidas']
+        
  
-        os.remove("C:/Users/57761933898/Desktop/diego/guessing-game-python/archives/players.xlsx")
-        csv_data = jogadores.to_excel('C:/Users/57761933898/Desktop/diego/guessing-game-python/archives/players.xlsx')
+        os.remove('D:/Projetos/guessing-game-python/archives/players.xlsx')
+        csv_data = jogadores.to_excel('D:/Projetos/guessing-game-python/archives/players.xlsx')
         
     
     def new_player(self):
-        jogadores = pd.read_excel('C:/Users/57761933898/Desktop/diego/guessing-game-python/archives/players.xlsx',index_col='id')
+        jogadores = pd.read_excel('D:/Projetos/guessing-game-python/archives/players.xlsx',index_col='id')
         jogadores = pd.DataFrame(jogadores)
         dados = [self.__nome, self.__pontos, self.__moedas, self.__partidas, self.__media]
     
         jogadores.loc[len(jogadores.index)] = dados
         
-        os.remove("C:/Users/57761933898/Desktop/diego/guessing-game-python/archives/players.xlsx")
-        csv_data = jogadores.to_excel('C:/Users/57761933898/Desktop/diego/guessing-game-python/archives/players.xlsx')
+        os.remove('D:/Projetos/guessing-game-python/archives/players.xlsx')
+        csv_data = jogadores.to_excel('D:/Projetos/guessing-game-python/archives/players.xlsx')
