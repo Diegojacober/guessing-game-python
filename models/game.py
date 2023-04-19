@@ -33,7 +33,7 @@ class Game():
                                                          }},
         ]
         
-        self.__turn = 1
+        self.__turn = 0
         self.__pontos = 0
         self.__jogador = jogador
 
@@ -89,36 +89,37 @@ class Game():
     def __check_word(self,palpite: str, palavra: str, dicas: list):
         
         if palpite != palavra:
-            
-            if self.__turn == 1:
+            if self.__turn == 0:
                 print(f'\033[31mTudo bem, é meio dificil acertar de primeira, aqui vai uma dica para te ajudar:\n\t{dicas[0]}\033[m')
-            elif self.__turn == 2:
+            elif self.__turn == 1:
                 print(f'\033[31mLá vai, a segunda dica é...\n\t{dicas[1]}\033[m')
-            elif self.__turn == 3:
+            elif self.__turn == 2:
                 print(f"\033[31mAgora é pra matar, mais uma dica:\t{dicas[2]}\033[m")
-            elif self.__turn == 4:
+            elif self.__turn == 3:
                 print(f"\033[31mVixi parece que as coisas estão meio complicadas hoje, para finalizar, lá vai outra dica:\n\t{dicas[3]}\033[m")
-            elif self.__turn == 5 :
+            elif self.__turn == 4 :
                 print("\033[31mÉ agora ou nunca, ultima chance, ultima dica, se prepare!!\033[m")
                 for i in range(3):
                     sleep(1)
                     print(f"\033[33m{i+1}\033[m")
                 print(f"\t{dicas[4]}")
             self.__turn += 1
+            if self.__turn > 5:
+                return 'fim' 
         elif palpite == palavra:
-            if self.__turn == 1:
+            if self.__turn == 0:
                print("\033[1;32mMas que já!!!, você anda treinando né\ndepois dessa sou obrigado a te dar mais +25 pontos\033[m")
                self.__pontos += 25
-            elif self.__turn == 2:
+            elif self.__turn == 1:
                 print("\033[1;32mMuito bom, somente  uma dica, está muito bem de memória em!! \ntoma +20 pontos, você merece\033[m")
                 self.__pontos += 20
-            elif self.__turn == 3:
+            elif self.__turn == 2:
                print("\033[1;32mNada mal!! conseguiu mostrar toda sua eficiencia, +15 pontos para recompensar seu esforço\033[m")
                self.__pontos += 15
-            elif self.__turn == 4:
-               print("\033[1;32m'Foi difícil foi, foi intenso foi...', PAREBÉNS!!! foi dificil mas você consegiu, lá vai +10 pontos\033[m")
+            elif self.__turn == 3:
+               print("\033[1;32m'Foi difícil foi, foi intenso foi...', PARABÉNS!!! foi dificil mas você consegiu, lá vai +10 pontos\033[m")
                self.__pontos += 10
-            elif self.__turn == 5:
+            elif self.__turn == 4:
                 print("\033[1;32mPooorrrr poucooooo, raspou mas passou, o que importa é passar. Se fosse um boletim, você receberia um 5, então toma +5 pontos\033[m")
                 self.__pontos += 5
                 
@@ -136,7 +137,7 @@ class Game():
             palpite = self.__get_kick()
             check_word = self.__check_word(palpite=palpite,palavra=palavra_sorteada['palavra'],dicas=palavra_sorteada['dicas'])
             
-            if check_word == 'fim' or self.__turn == 6:
+            if check_word == 'fim':
                 print('--------------PARTIDA FINALIZADA--------------')
                 break
         self.__jogador.save_player(name=self.__jogador.nome,pontos=self.__pontos,moedas=self.__pontos)
