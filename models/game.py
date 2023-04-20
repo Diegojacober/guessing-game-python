@@ -2,6 +2,7 @@ import inquirer
 import random
 from time import sleep
 from models.player import Player
+import pandas as pd
 
 class Game():
 
@@ -87,6 +88,13 @@ class Game():
         return palpite
     
     def __check_word(self,palpite: str, palavra: str, dicas: list):
+        """
+         -> Função que verifica seo palpite dado pelo usuário, é a palavra correta, exibindo dica ou erro
+
+        :palpite: str -> chute do usuário 
+        :palavra: str -> palavra sorteada
+        :dicas: list -> lista com as dicas da palavra 
+        """
         
         if palpite != palavra:
             if self.__turn == 0:
@@ -140,11 +148,17 @@ class Game():
             if check_word == 'fim':
                 print('--------------PARTIDA FINALIZADA--------------')
                 break
-        self.__jogador.save_player(name=self.__jogador.nome,pontos=self.__pontos,moedas=self.__pontos)
+        Player.save_player(name=self.__jogador.nome,pontos=self.__pontos,moedas=self.__pontos)
 
+
+    @staticmethod
+    def list_ranking():
+        df = pd.read_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
+        top5 = df.loc[:,['nome','pontuacao','mediapontos']]
+        top5 = top5.sort_values(by=['pontuacao'], ascending=False, na_position='last',ignore_index=True).head(5)
+        
+        print(top5)
 
 if __name__ == '__main__':
-    game = Game()
-    while True:
-        game.play()
-    
+    # Game.list_ranking()
+    ...

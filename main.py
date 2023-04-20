@@ -1,6 +1,7 @@
 import pandas as pd
 from models.player import Player
 from models.game import Game
+import inquirer
 
 def get_players() -> pd.DataFrame:
     """esta função procura o arquivo excel com todos os jogadores
@@ -40,10 +41,27 @@ def get_player_data() -> Player:
                 player_data.new_player()
                 return player_data
 
-def menu():
-    ...    
+def menu(game: Game):
+    options = [('Jogar','J'), ('Ver Ranking','R')]
+    questions = [
+            inquirer.List(
+                "option",
+                message="Qual tema você deseja jogar?",
+                choices=[ o for o in options],
+            ),
+        ]
+
+    answers = inquirer.prompt(questions)
+
+    if answers['option'] == 'J':
+        game.play()
+    elif answers['option'] == 'R':
+        Game.list_ranking()
     
+
+
+#Pegar o nome do usuário e registrar na tabela
 player = get_player_data()
 game = Game(player)
 while True:
-    game.play()
+    menu(game)
