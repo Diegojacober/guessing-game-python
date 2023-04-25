@@ -42,6 +42,11 @@ def get_player_data() -> Player:
                 return player_data
 
 def menu(game: Game):
+    """Função responsável por fazer o gerenciamento do menu do jogo
+
+    Args:
+        game (Game): Jogo ativo
+    """
     options = [('Jogar','J'), ('Ver Ranking','R')]
     questions = [
             inquirer.List(
