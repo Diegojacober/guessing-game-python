@@ -33,7 +33,8 @@ class Player():
     
     @staticmethod
     def save_player(name:str, pontos:int, moedas:int):
-        jogadores = pd.read_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx',index_col='id')
+        jogadores = pd.read_excel('D:/Projetos/guessing-game-python/archives/players.xlsx',index_col='id')
+        # jogadores = pd.read_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx',index_col='id')
         jogadores = pd.DataFrame(jogadores)
         player_data = jogadores.loc[jogadores['nome'] == name]
         index = player_data.index[0]
@@ -44,8 +45,10 @@ class Player():
         jogadores.at[int(index),'mediapontos'] = jogadores.at[int(index),'pontuacao'] / jogadores.at[int(index),'partidas']
         print(player_data)
  
-        os.remove('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
-        csv_data = jogadores.to_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
+        # os.remove('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
+        # csv_data = jogadores.to_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
+        os.remove('D:/Projetos/guessing-game-python/archives/players.xlsx')
+        csv_data = jogadores.to_excel('D:/Projetos/guessing-game-python/archives/players.xlsx')
 
     
     def new_player(self):
@@ -55,7 +58,9 @@ class Player():
     
         jogadores.loc[len(jogadores.index)] = dados
         
-        os.remove('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
-        csv_data = jogadores.to_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
+        # os.remove('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
+        # csv_data = jogadores.to_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
+        os.remove('D:/Projetos/guessing-game-python/archives/players.xlsx')
+        csv_data = jogadores.to_excel('D:/Projetos/guessing-game-python/archives/players.xlsx')
 
 

@@ -27,11 +27,60 @@ class Game():
                     'Foi lançado pela primeira vez em 1964 e ainda é produzido atualmente.'
                  ]}
             ]},
-            {'tema': 'Paises', 'preco': 20, 'palavras': {'palavra': 'Brasil',
-                                                         'dicas':
-                                                         ['País do futebol',
-                                                          'Maior país da América do sul']
-                                                         }},
+            {'tema': 'Paises', 'preco': 20, 'palavras': [
+                {'palavra': 'BRASIL',
+                    'dicas':
+                    ['País do futebol',
+                    'Maior país da América do sul',
+                    'Pratos típicos como feijoada, churrasco e brigadeiro.',
+                    'A dança mais famosa do país é o samba',
+                    'A região amazônica é um importante patrimônio natural']
+                },
+                {'palavra': 'ESTADOS UNIDOS',
+                 'dicas': [
+                    'É considerado o país mais rico do mundo',
+                    'País dos super-herois mais famosos',
+                    'A culinária local inclui pratos icônicos como hambúrgueres, cachorros-quentes, pizza e donuts.',
+                    'É o palco da maior competição de basquete do mundo, a NBA',
+                    'A Estátua da Liberdade é um dos monumentos mais icônicos do país e um símbolo da liberdade e da democracia.'
+                 ]},
+                {'palavra': 'ALEMANHA',
+                 'dicas': [
+                    'Está localizado no centro do continente Europeu',
+                    'Participou ativamente da Primeira e da Segunda guerra mundial',
+                    'Seus pratos típicos são salsicha e cerveja',
+                    'É o lar de várias empresas conhecidas internacionalmente, incluindo marcas de carros, como Mercedes-Benz e BMW, e empresas de tecnologia, como a SAP',
+                    'A pais sede da Bosch.'
+                 ]},
+            ]
+            },
+            {'tema': 'Pessoas do Mundo da Tecnologia', 'preco': 20, 'palavras': [
+                {'palavra': 'BILL GATES',
+                    'dicas':
+                    ['Ele já foi premiado com várias honrarias, incluindo a Ordem do Império Britânico e a Medalha Nacional de Tecnologia e Inovação dos Estados Unidos.',
+                    'Juntamente com sua esposa, ele fundou uma das maiores organizações de caridade do mundo, que trabalha para combater a pobreza e melhorar a saúde global.',
+                    'Largou Harvard para acreditar no sonho da sua própria empresa de softwares, seu primeiro contrato de sucesso foi com a IBM',
+                    'Ficou durante anos como a pessoa mais rica do mundo, e continua estando no ranking dos mais ricos do mundo',
+                    'A empresa fundada por ele, desenvolveu o sistema operacional mais utilizado hoje em dia']
+                },
+                {'palavra': 'STEVE JOBS',
+                 'dicas': [
+                    'Ele é conhecido por seu estilo de liderança único e inovador, que se concentra na criatividade e na simplicidade.',
+                    'Ele fundou a Pixar Animation Studios, que produziu alguns dos filmes animados de maior sucesso da história.',
+                    'Apesar de ser um grande profissional, ficou muito conhecido por ser muito exigente, causando pôlemicas com seus funcionários',
+                    'Ele foi responsável por transformar a Apple em uma das empresas mais valiosas do mundo, com um valor de mercado que ultrapassou US$ 1 trilhão.',
+                    'Ele foi o cofundador da Apple, uma das maiores empresas de tecnologia do mundo.'
+                 ]},
+                {'palavra': 'MARK ZUCKERBERG',
+                 'dicas': [
+                    'Ele é conhecido por sua visão empreendedora e por transformar a forma como as pessoas se conectam online.',
+                    'Ele foi um dos mais jovens bilionários do mundo e atualmente é um dos mais ricos, com uma fortuna pessoal estimada em mais de US$ 100 bilhões.',
+                    'Ele é conhecido por sua filantropia e já doou bilhões de dólares para causas de caridade através da Iniciativa Chan Zuckerberg.',
+                    'Ainda na faculdade criou uma rede social, que no momento era apenas interna, para interagir entre seus colegas de faculdade',
+                    'Ele é o fundador e CEO do Facebook, a maior rede social do mundo.'
+                 ]},
+            ]
+            },
         ]
         
         self.__turn = 0
@@ -153,7 +202,8 @@ class Game():
 
     @staticmethod
     def list_ranking():
-        df = pd.read_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
+        # df = pd.read_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
+        df = pd.read_excel('D:/Projetos/guessing-game-python/archives/players.xlsx')
         top5 = df.loc[:,['nome','pontuacao','mediapontos']]
         top5 = top5.sort_values(by=['pontuacao'], ascending=False, na_position='last',ignore_index=True).head(5)
         
