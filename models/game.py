@@ -186,9 +186,11 @@ class Game():
             print(f"\033[31m Que pena... Não foi dessa vez, tente novamente!!\033[m")
             return 'fim'
         
-    def play(self):
+    def play(self) -> None:
+        """
+        Função responsável por fazer o gerenciamento do jogo
+        """
         palavra_sorteada = self.__choice_word()
-        print(palavra_sorteada)
         
         while True:
             palpite = self.__get_kick()
@@ -201,7 +203,10 @@ class Game():
 
 
     @staticmethod
-    def list_ranking():
+    def list_ranking() -> None:
+        """
+        Função estática responsável por pegar os dados na base de dados e gerar um ranking
+        """
         # df = pd.read_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
         df = pd.read_excel('D:/Projetos/guessing-game-python/archives/players.xlsx')
         top5 = df.loc[:,['nome','pontuacao','mediapontos']]

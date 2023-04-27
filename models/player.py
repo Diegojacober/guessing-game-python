@@ -32,7 +32,14 @@ class Player():
         return self.__media
     
     @staticmethod
-    def save_player(name:str, pontos:int, moedas:int):
+    def save_player(name:str, pontos:int, moedas:int) -> None:
+        """ Função estática que salva/atualiza os dados de um jogador
+
+        Args:
+            name (str): Nome do jogador
+            pontos (int): Pontuação do jogador
+            moedas (int): Quantas moedas o jogador tem
+        """
         jogadores = pd.read_excel('D:/Projetos/guessing-game-python/archives/players.xlsx',index_col='id')
         # jogadores = pd.read_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx',index_col='id')
         jogadores = pd.DataFrame(jogadores)
@@ -51,7 +58,10 @@ class Player():
         csv_data = jogadores.to_excel('D:/Projetos/guessing-game-python/archives/players.xlsx')
 
     
-    def new_player(self):
+    def new_player(self) -> None:
+        """
+        Função que cria um novo jogador na base de dados
+        """
         jogadores = pd.read_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx',index_col='id')
         jogadores = pd.DataFrame(jogadores)
         dados = [self.__nome, self.__pontos, self.__moedas, self.__partidas, self.__media]
