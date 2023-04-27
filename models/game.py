@@ -205,7 +205,7 @@ class Game():
         # df = pd.read_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
         df = pd.read_excel('D:/Projetos/guessing-game-python/archives/players.xlsx')
         top5 = df.loc[:,['nome','pontuacao','mediapontos']]
-        top5 = top5.sort_values(by=['pontuacao'], ascending=False, na_position='last',ignore_index=True).head(5)
+        top5 = top5.sort_values(by=['pontuacao','mediapontos'], ascending=False, na_position='last',ignore_index=True).head(5)
         
         print(top5)
 
