@@ -147,20 +147,19 @@ class Game():
         
         if palpite != palavra:
             if self.__turn == 0:
-                print(f'\033[31mTudo bem, é meio dificil acertar de primeira, aqui vai uma dica para te ajudar:\n\t{dicas[0]}\033[m')
+                print(f'\033[31mTudo bem, é meio dificil acertar de primeira, aqui vai uma dica para te ajudar:\n\t{dicas[1]}\033[m')
             elif self.__turn == 1:
-                print(f'\033[31mLá vai, a segunda dica é...\n\t{dicas[1]}\033[m')
+                print(f'\033[31mLá vai, a segunda dica é...\n\t{dicas[2]}\033[m')
             elif self.__turn == 2:
-                print(f"\033[31mAgora é pra matar, mais uma dica:\t{dicas[2]}\033[m")
+                print(f"\033[31mAgora é pra matar, mais uma dica:\t{dicas[3]}\033[m")
             elif self.__turn == 3:
-                print(f"\033[31mVixi parece que as coisas estão meio complicadas hoje, para finalizar, lá vai outra dica:\n\t{dicas[3]}\033[m")
-            elif self.__turn == 4 :
                 print("\033[31mÉ agora ou nunca, ultima chance, ultima dica, se prepare!!\033[m")
                 for i in range(3):
                     sleep(1)
                     print(f"\033[33m{i+1}\033[m")
                 print(f"\t{dicas[4]}")
             self.__turn += 1
+                
             if self.__turn > 5:
                 return 'fim' 
         elif palpite == palavra:
@@ -192,6 +191,7 @@ class Game():
         """
         palavra_sorteada = self.__choice_word()
         
+        print(palavra_sorteada['dicas'][0])
         while True:
             palpite = self.__get_kick()
             check_word = self.__check_word(palpite=palpite,palavra=palavra_sorteada['palavra'],dicas=palavra_sorteada['dicas'])
@@ -199,7 +199,7 @@ class Game():
             if check_word == 'fim':
                 print('--------------PARTIDA FINALIZADA--------------')
                 break
-        Player.save_player(name=self.__jogador.nome,pontos=self.__pontos,moedas=self.__pontos)
+        Player.save_player(name=self.__jogador._name,pontos=self.__pontos,moedas=self.__pontos, idade=self.__jogador._years, nome_antigo='')
 
 
     @staticmethod
@@ -207,12 +207,24 @@ class Game():
         """
         Função estática responsável por pegar os dados na base de dados e gerar um ranking
         """
-        # df = pd.read_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
-        df = pd.read_excel('D:/Projetos/guessing-game-python/archives/players.xlsx')
-        top5 = df.loc[:,['nome','pontuacao','mediapontos']]
+        df = pd.read_excel('C:/Users/CT67CA/Desktop/guessing-game-python/archives/players.xlsx')
+        # df = pd.read_excel('D:/Projetos/guessing-game-python/archives/players.xlsx')
+        top5 = df.loc[:,['nome','partidas','pontuacao','mediapontos']]
         top5 = top5.sort_values(by=['pontuacao','mediapontos'], ascending=False, na_position='last',ignore_index=True).head(5)
         
         print(top5)
+
+    def update_name(self):
+        print(f"Olá {self.__jogador._name}")
+        new_name = ''
+        while True:
+            new_name = input("Digite seu novo nome: ").upper()
+            if len(new_name) < 3:
+                print("Seu nome deve ser maior que 3 caracteres")
+                continue
+            break
+        
+        self.__jogador.modify_name(new_name,nome_antigo=self.__jogador.name)
 
 if __name__ == '__main__':
     # Game.list_ranking()

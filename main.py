@@ -19,27 +19,39 @@ def get_player_data() -> Player:
     Returns: Player -> Objeto do jogador
     """
     name = ''
+    years = 0
     while True:
         name = input('Qual seu nome? ').upper()
         if len(name) < 3:
             print('Digite pelo menos seu primeiro nome')
-        else:
-            players_table = get_players()
-            players_name = list(players_table["nome"])
-            if name in players_name:
-                player_data = players_table.loc[players_table['nome'] == name]
-                
-                jogador = Player(nome=player_data['nome'].values[0],
-                                 pontos=player_data['pontuacao'].values[0],
-                                 partidas=player_data['partidas'].values[0],
-                                 moedas=player_data['moedas'].values[0],
-                                 media=player_data['mediapontos'].values[0])
-                return jogador
-            else:
-                print('Criando novo jogador...')
-                player_data = Player(nome=name)
-                player_data.new_player()
-                return player_data
+        break
+    while True:
+        years = input('Digite sua idade: ')[0:2]
+        try: 
+            years = int(years)
+        except:
+            print("Digite apenas numeros")
+            continue
+        break
+
+        
+    players_table = get_players()
+    players_name = list(players_table["nome"])
+    if name in players_name:
+        player_data = players_table.loc[players_table['nome'] == name]
+        
+        jogador = Player(nome=player_data['nome'].values[0],
+                            pontos=player_data['pontuacao'].values[0],
+                            partidas=player_data['partidas'].values[0],
+                            moedas=player_data['moedas'].values[0],
+                            media=player_data['mediapontos'].values[0],
+                            idade=player_data['idade'].values[0])
+        return jogador
+    else:
+        print('Criando novo jogador...')
+        player_data = Player.create_player(nome=name,idade=years)
+        player_data.new_player()
+        return player_data
 
 def menu(game: Game):
     """Função responsável por fazer o gerenciamento do menu do jogo
@@ -47,7 +59,7 @@ def menu(game: Game):
     Args:
         game (Game): Jogo ativo
     """
-    options = [('Jogar','J'), ('Ver Ranking','R')]
+    options = [('Jogar','J'), ('Ver Ranking','R'), ('Atualizar meu nome', 'A')]
     questions = [
             inquirer.List(
                 "option",
@@ -62,6 +74,9 @@ def menu(game: Game):
         game.play()
     elif answers['option'] == 'R':
         Game.list_ranking()
+    elif answers['option'] == 'A':
+        game.update_name()
+
     
 
 
